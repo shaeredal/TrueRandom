@@ -6,7 +6,7 @@ print("It's works!")
 
 
 def main():
-    return "over nine thousand!1111111111111111111111"
+    return "666"
 
 if __name__ == "__main__":
     main()
