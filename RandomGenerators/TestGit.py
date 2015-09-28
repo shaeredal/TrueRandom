@@ -1,4 +1,4 @@
-__author__ = 'Матвей долбаеб'
+__author__ = 'Матвей'
 print("It's works!!!")
 print("It's works!")
 print("It's works!")
