@@ -6,7 +6,7 @@ print("It's works!")
 
 
 def main():
-    return 42
+    return 422
 
 if __name__ == "__main__":
     main()
