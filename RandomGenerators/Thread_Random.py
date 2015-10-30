@@ -14,15 +14,27 @@ def adder():
             myNum = 0
 
 
-for n in range(8):
-    threading.Thread(target=adder).start()
+def generate(count):
+    for n in range(8):
+        threading.Thread(target=adder).start()
 
-f = open('D:\\test', 'w')
+    f = open('D:\\test', 'w')
 
-for n in range(1024):
-    time.sleep(0.01)
-    theNum = myNum % 2
-    print(theNum)
-    f.write(str(theNum) + '\n')
+    for n in range(count):
+        time.sleep(0.001)
+        theNum = myNum % 2
+        print(theNum)
+        f.write(str(theNum) + '\n')
 
-f.close()
+    f.close()
+
+
+def make_numbers():
+    f = open('D:\\test', 'r')
+
+
+    f.close()
+
+
+if __name__ == '__main__':
+    generate(1024)
