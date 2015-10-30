@@ -3,17 +3,19 @@ __author__ = 'Я'
 import threading
 import time
 
+active = True
 myNum = 0
 
 def adder():
     global myNum
-    while True:
+    while active:
         myNum += 1
         if myNum > 108:
             myNum = 0
 
 
 def generate(count):
+    global active
     threads = []
     for n in range(8):
         threads.append(threading.Thread(target=adder))
@@ -29,6 +31,7 @@ def generate(count):
 
     f.write(myStr)
     f.close()
+    active = False
 
 
 def make_numbers():
@@ -39,6 +42,7 @@ def make_numbers():
         for j in range(32):
             newNum *= 2
             newNum += int(f.readline())
+        print(newNum)
         fu.write(str(newNum) + '\n')
 
     f.close()
