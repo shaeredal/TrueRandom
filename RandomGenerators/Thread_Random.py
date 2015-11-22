@@ -32,7 +32,6 @@ def generate(count):
 def make_numbers():
     f = open('D:\\test', 'r')
 
-
     f.close()
 
 

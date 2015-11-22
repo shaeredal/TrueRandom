@@ -1,4 +1,3 @@
-__author__ = 'Матвей'
 import pyaudio
 import struct
 import math
@@ -16,13 +15,11 @@ def get_rms(block):
     # mean over time of the square of the amplitude.
     # so we need to convert this string of bytes into
     # a string of 16-bit samples...
-
     # we will get one short out for each
     # two chars in the string.
     count = len(block) / 2
     format = "%dh" % count
     shorts = struct.unpack(format, block)
-
     # iterate over the block.
     sum_squares = 0.0
     for sample in shorts:
