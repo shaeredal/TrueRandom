@@ -53,5 +53,5 @@ def make_numbers():
 
 
 if __name__ == '__main__':
-    generate(1024)
+    generate(32)
     make_numbers()
