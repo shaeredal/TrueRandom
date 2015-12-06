@@ -28,10 +28,10 @@ def polygon(numbers):
     #plt.figure()
     c = Counter(numbers)
     vars = list(c.keys())
-    freq = [0]
+    freq = []
     for key in c.keys():
         freq.append(c[key]/len(numbers))
-    freq = freq[:-1]
+    # freq = freq[]
     plt.plot(vars, freq)
     plt.xlabel("Value")
     plt.ylabel("Frequency")
@@ -57,7 +57,7 @@ def variance_function(numbers):
     plt.grid(True)
 
 
-def noize(numbers):
+def noise(numbers):
     """Рисует случайные величины на координатной плоскости,
     красные точки - точки которые уже встречались в последовательности
     синие точки - точки, с наименьшим отклонением
@@ -102,17 +102,31 @@ def noize(numbers):
             plt.plot(item[0], item[1], 'g.')
 
 
-def display():
+def to_bits(numbers):
+    bits = []
+    string = ""
+    for n in numbers:
+        bits.append(bin(n)[2:])
+    for n in bits:
+        string += n
+    string = [int(s) for s in string]
+    return string
+
+
+def load_file(file_name):
+    with open(file_name, 'r') as f:
+        arr = f.readlines()
+    arr = [int(x) for x in arr]
+    return arr
+
+
+def display(nums):
     """Для вывода на экран всего что нарисовано
 
     вызывается последним
     """
+    variance_function(to_bits(nums))
+    histogramm(nums)
+    polygon(nums)
+    noise(nums)
     plt.show()
-
-if __name__ == '__main__':
-    lol = [randint(0, 100) for x in range(10000)]
-    variance_function([randint(0, 1) for x in range(1000)])
-    histogramm(lol, 20)
-    polygon(lol)
-    noize(lol)
-    display()
