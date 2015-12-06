@@ -1,6 +1,6 @@
 import pyaudio
 import struct
-import bitarray
+from bitarray import bitarray
 
 
 class sound_entropy:
@@ -14,23 +14,27 @@ class sound_entropy:
                          input=True,
                          frames_per_buffer=4)
 
-        self.entropy = bitarray.bitarray()
+        self.entropy = bitarray()
         self._collect_entropy()
-        self._unbias()
 
 
     def _collect_entropy(self):
+        collection = bitarray()
         for i in range(1000):
             block = self.stream.read(4)
             shorts = struct.unpack('4h', block)
             for val in shorts:
                 bit = val & 1
-                self.entropy.append(bit)
+                collection.append(bit)
+        self.entropy = self._unbias(collection)
 
 
-    def _unbias(self):
-        self.entropy = bitarray.bitarray([self.entropy[i] for i in range( 0 ,len(self.entropy),2)\
-         if self.entropy[i] != self.entropy[i+1]])
+    def _unbias(self, collection):
+        return bitarray([collection[i] for i in range( 0 ,len(collection),2) if collection[i] != collection[i+1]])
+
+
+    def collect(self):
+        self._collect_entropy()
 
 
     def get_entropy(self):
@@ -39,6 +43,16 @@ class sound_entropy:
 
     def get_bytes(self):
         return self.entropy.tobytes()
+
+
+    def to_bin_list(self):
+        result = []
+        for i in self.entropy.tolist():
+            if i:
+                result.append(1)
+            else:
+                result.append(0)
+        return result
 
 
     def write_bin_in_text_file(self, filename):
@@ -55,8 +69,8 @@ def test():
     #print(se.get_bytes())
     #for i in se.get_bytes():
     #    print(i)
-    se.write_bin_in_text_file('filtered.txt')
-
+    #se.write_bin_in_text_file('filtered.txt')
+    print(se.to_bin_list())
 
 
 
