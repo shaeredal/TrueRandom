@@ -52,7 +52,7 @@ class mouse_entropy(object):
                     f.write('0\n')
 
 if __name__ == '__main__':
-    import StatisticWindow as sw
+    import statistic as sw
     me = mouse_entropy()
     me.get_random_bits(3000)
     sw.display(list(me.get_bytes()))
