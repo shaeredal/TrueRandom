@@ -24,7 +24,10 @@ class true_rng:
 
 
     def _get_value(self):
-        pass
+        b_int = []
+        for b in range(4):
+            b_int.append(self._get_byte())
+        return int.from_bytes(b_int, byteorder='big')
 
 
     def get_number(self, start = 0, end = 0):
@@ -34,7 +37,7 @@ class true_rng:
         if end < start:
             raise Exception('wrong parameters')
 
-        val = (self._get_byte())
+        val = self._get_value()
         ran = end - start
         return (val % ran) + start
 
@@ -45,7 +48,7 @@ def test():
     #    print(byte)
     print(len(tr.bytes))
     while True:
-        print(tr.get_number(14))
+        print(tr.get_number(30000))
         #time.sleep(1)
 
 if __name__ == '__main__':
