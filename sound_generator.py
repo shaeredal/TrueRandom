@@ -6,15 +6,21 @@ class true_rng:
     def __init__(self):
         self.collector = sound_entropy()
         self.bytes = self.collector.get_bytes()
-
+        self.cur = 0
 
     def _get_byte(self):
-        while True:
-            for byte in self.bytes:
-                print(byte)
-                yield byte
+        #while True:
+        #    for byte in self.bytes:
+        #        print(byte)
+        #        yield byte
+        #    self.collector.collect()
+        #    self.bytes = self.collector.get_bytes()
+        if len(self.bytes) == self.cur:
             self.collector.collect()
             self.bytes = self.collector.get_bytes()
+            self.cur = 0
+        self.cur += 1
+        return self.bytes[self.cur - 1]
 
 
     def _get_value(self):
@@ -28,7 +34,7 @@ class true_rng:
         if end < start:
             raise Exception('wrong parameters')
 
-        val = next(self._get_byte())
+        val = (self._get_byte())
         ran = end - start
         return (val % ran) + start
 
@@ -38,9 +44,9 @@ def test():
     #for byte in tr._get_byte():
     #    print(byte)
     print(len(tr.bytes))
-    #while True:
-    #    print(tr.get_number(14))
-    #    time.sleep(1)
+    while True:
+        print(tr.get_number(14))
+        #time.sleep(1)
 
 if __name__ == '__main__':
     test()
