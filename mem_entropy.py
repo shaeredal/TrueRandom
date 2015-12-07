@@ -1,4 +1,5 @@
 import psutil
+import time
 from bitarray import bitarray
 from entropy_class import entropy
 
@@ -10,16 +11,23 @@ class mem_entropy(entropy):
 
     def _collect_entropy(self):
         collection = bitarray()
-        for i in range(1000):
+        for i in range(4000):
+            time.sleep(0.0001)
             val = psutil.virtual_memory()[3]
             if val != self.cur:
+                print(val)
                 self.cur = val
-                collection.append((self.cur >> 3) & 1)
+                collection.append((self.cur // 1000) % 2)
+                print(collection[-1])
+        if len(collection) % 2 != 0:
+            collection = collection[1:]
         self.entropy = self._unbias(collection)
 
 
 def test():
-    pass
+    me = mem_entropy()
+    print(me.get_entropy())
+    print(len(me.get_bytes()))
 
 
 if __name__ == '__main__':
