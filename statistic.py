@@ -10,28 +10,12 @@ def histogramm(numbers, bins_count=10, name=""):
     bins_count - количество столбиков
     name - название графика
     """
-    plt.subplot(2, 2, 1)
+    plt.subplot(2, 1, 1)
     plt.hist(numbers, bins=bins_count, normed=True)
     plt.title(name)
     plt.xlabel("Value")
     plt.ylabel("Frequency")
     plt.grid(True)
-
-
-def polygon(numbers):
-    """Рисует полигон значений и относительных частот
-
-    numbers - последовательность
-    """
-    plt.subplot(2, 2, 2)
-    c = Counter(numbers)
-    vars = list(c.keys())
-    freq = []
-    for key in c.keys():
-        freq.append(c[key]/len(numbers))
-    plt.plot(vars, freq)
-    plt.xlabel("Value")
-    plt.ylabel("Frequency")
 
 
 def variance_function(numbers):
@@ -123,6 +107,5 @@ def display(nums):
     """
     variance_function(to_bits(nums))
     histogramm(nums)
-    polygon(nums)
     noise(nums)
     plt.show()
