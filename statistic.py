@@ -1,4 +1,5 @@
 import pylab as plt
+from random import randint
 from collections import Counter
 
 
@@ -99,12 +100,12 @@ def load_file(file_name):
     return arr
 
 
-def display(nums, entropy):
+def display(nums):
     """Для вывода на экран всего что нарисовано
 
     вызывается последним
     """
-    variance_function(entropy)
+    variance_function(to_bits(nums))
     histogramm(nums)
     noise(nums)
     plt.show()

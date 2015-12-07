@@ -16,7 +16,7 @@ root.configure(bg=bgc)
 root.title("Easy Random")
 
 
-def get_params(tr, entropy):
+def get_params(tr):
     from_num = int(entry2.get())
     to_num = int(entry3.get()) + 1
     range_num = int(entry1.get())
@@ -25,31 +25,28 @@ def get_params(tr, entropy):
     text1.delete(1.0, END)
     text1.insert(INSERT, nums)
 
-    statistic.display(nums, entropy)
+    statistic.display(nums)
 
 
 def random_from_mouse():
-    var = mouse_entropy()
-    tr = true_rng(var)
-    get_params(tr, var.to_bin_list())
+    text1.insert(INSERT, 'Wait')
+    tr = true_rng(mouse_entropy())
+    get_params(tr)
 
 
 def random_from_soundcard():
-    var = sound_entropy()
-    tr = true_rng(var)
-    get_params(tr, var.to_bin_list())
+    tr = true_rng(sound_entropy())
+    get_params(tr)
 
 
 def random_from_threads():
-    var = thread_entropy()
-    tr = true_rng(var)
-    get_params(tr, var.to_bin_list())
+    tr = true_rng(thread_entropy())
+    get_params(tr)
 
 
 def random_from_mem():
-    var = mem_entropy()
-    tr = true_rng(var)
-    get_params(tr, var.to_bin_list())
+    tr = true_rng(mem_entropy())
+    get_params(tr)
 
 # сколько чисел
 entry1 = Entry(root, font='Arial 9')
