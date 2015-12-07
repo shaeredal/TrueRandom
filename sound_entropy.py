@@ -10,13 +10,12 @@ class sound_entropy(entropy):
         pa = pyaudio.PyAudio()
 
         self.stream = pa.open(format=pyaudio.paInt16,
-                         channels=1,
-                         rate=48000,
-                         input=True,
-                         frames_per_buffer=4)
+                              channels=1,
+                              rate=48000,
+                              input=True,
+                              frames_per_buffer=4)
 
         super(sound_entropy, self).__init__()
-
 
     def _collect_entropy(self):
         collection = bitarray()
@@ -31,15 +30,8 @@ class sound_entropy(entropy):
 def test():
     se = sound_entropy()
     print(se.get_entropy())
-    #print(se.get_bytes())
-    #for i in se.get_bytes():
-    #    print(i)
-    #se.write_bin_in_text_file('filtered.txt')
     print(se.to_bin_list())
-
 
 
 if __name__ == '__main__':
     test()
-
-

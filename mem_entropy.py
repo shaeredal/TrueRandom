@@ -5,6 +5,7 @@ from entropy_class import entropy
 
 
 class mem_entropy(entropy):
+
     def __init__(self):
         self.cur = psutil.virtual_memory()[3]
         super(mem_entropy, self).__init__()
@@ -32,5 +33,3 @@ def test():
 
 if __name__ == '__main__':
     test()
-
-

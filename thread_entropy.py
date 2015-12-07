@@ -11,14 +11,12 @@ class thread_entropy(entropy):
         self.ran_num = 0
         super(thread_entropy, self).__init__()
 
-
     def _adder(self):
         while self.active:
             time.sleep(0.0001)
             self.ran_num += 1
             if self.ran_num > 4000:
                 self.ran_num = 0
-
 
     def _collect_entropy(self):
         threads = []
