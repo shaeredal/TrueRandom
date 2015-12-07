@@ -43,12 +43,12 @@ class true_rng:
 
 
 def test():
-    tr = true_rng(mouse_entropy())
+    tr = true_rng(sound_entropy())
     #for byte in tr._get_byte():
     #    print(byte)
     #print(len(tr.bytes))
     #import time
-    while True:
+    for i in range(1000):
         print(tr.get_number(200, 400))
         #time.sleep(1)
     #import StatisticWindow
