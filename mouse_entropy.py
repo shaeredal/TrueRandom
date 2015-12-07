@@ -1,41 +1,58 @@
 from tkinter import *
-from bitarray import bitarray
-from entropy_class import entropy
+import bitarray
+from operator import xor
+
+p = Tk()
 
 
-class mouse_entropy(entropy):
+class mouse_entropy(object):
 
     def __init__(self):
-        super(mouse_entropy, self).__init__()
+        self.random_bits = bitarray.bitarray()
 
+    def get_list(self):
+        nums = []
+        for val in self.random_bits:
+                if val:
+                    nums.append(1)
+                else:
+                    nums.append(0)
+        return nums
 
-    def _collect_entropy(self):
-        vs = Tk()
-        collection = bitarray()
-        prev = vs.winfo_pointerxy()
+    def get_random_bits(self, num):
+        global p
+        prev = p.winfo_pointerxy()
         i = 0
-        while i < 4000:
-            cur = vs.winfo_pointerxy()
-            if cur != prev:
+        while i != num:
+            if p.winfo_pointerxy() != prev:
                 i += 1
-                prev = cur
+                prev = p.winfo_pointerxy()
 
-                x = vs.winfo_pointerxy()[0] & 1
-                y = vs.winfo_pointerxy()[1] & 1
+                x = bin(p.winfo_pointerxy()[0])
+                y = bin(p.winfo_pointerxy()[1])
 
-                collection.append(x ^ y)
-                print(collection[-1])
-        vs.destroy()
-        self.entropy = self._unbias(collection)
+                x = int(x[-1:])
+                y = int(y[-1:])
 
+                res_bit = xor(x, y)
+                self.random_bits.append(res_bit)
+                print(self.random_bits[-1])
+        p.destroy()
+        return self.random_bits
 
-def test():
-    #import StatisticWindow as sw
-    me = mouse_entropy()
-    print(len(me.get_bytes()))
-    #sw.display(list(me.get_bytes()))
+    def get_bytes(self):
+        return self.random_bits.tobytes()
 
+    def write_bin_in_text_file(self, filename):
+        with open(filename, 'w') as f:
+            for val in self.random_bits:
+                if val:
+                    f.write('1\n')
+                else:
+                    f.write('0\n')
 
 if __name__ == '__main__':
-    test()
-
+    import statistic as sw
+    me = mouse_entropy()
+    me.get_random_bits(3000)
+    sw.display(list(me.get_bytes()))
