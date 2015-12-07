@@ -20,7 +20,6 @@ def get_params(tr):
     from_num = int(entry2.get())
     to_num = int(entry3.get()) + 1
     range_num = int(entry1.get())
-
     nums = [tr.get_number(from_num, to_num) for i in range(range_num)]
 
     text1.delete(1.0, END)
@@ -30,6 +29,7 @@ def get_params(tr):
 
 
 def random_from_mouse():
+    text1.insert(INSERT, 'Wait')
     tr = true_rng(mouse_entropy())
     get_params(tr)
 
