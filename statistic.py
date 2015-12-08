@@ -32,7 +32,7 @@ def variance_function(numbers):
             y -= 1
         y_list.append(y)
     plt.plot(y_list, 'b')
-    plt.plot(range(len(numbers)), [0 for y in range(len(numbers))], 'r')
+    plt.plot(range(len(y_list)), [0 for y in range(len(y_list))], 'r')
     plt.grid(True)
 
 
