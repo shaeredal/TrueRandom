@@ -5,9 +5,6 @@ from entropy_class import entropy
 
 class mouse_entropy(entropy):
 
-    def __init__(self):
-        super(mouse_entropy, self).__init__()
-
     def _collect_entropy(self):
         vs = Tk()
         collection = bitarray()
@@ -29,10 +26,10 @@ class mouse_entropy(entropy):
 
 
 def test():
-    import statistic as sw
+    #import statistic as sw
     me = mouse_entropy()
     print(len(me.get_bytes()))
-    sw.display(list(me.get_bytes()))
+    #sw.display(list(me.get_bytes()))
 
 
 if __name__ == '__main__':

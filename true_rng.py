@@ -39,6 +39,8 @@ class true_rng:
 
         val = self._get_value()
         ran = end - start
+        if ran > 2 ** 32:
+            raise Exception('')
         return (val % ran) + start
 
 
