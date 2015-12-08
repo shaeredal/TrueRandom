@@ -16,10 +16,11 @@ class mem_entropy(entropy):
             time.sleep(0.0001)
             val = psutil.virtual_memory()[3]
             if val != self.cur:
-                print(val)
+                print(bin(val))
                 self.cur = val
-                collection.append((self.cur // 1000) % 2)
+                collection.append((self.cur >> 12) & 1)
                 print(collection[-1])
         if len(collection) % 2 != 0:
             collection = collection[1:]
         self.entropy = self._unbias(collection)
+
