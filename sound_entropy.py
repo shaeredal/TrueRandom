@@ -10,10 +10,10 @@ class sound_entropy(entropy):
         pa = pyaudio.PyAudio()
 
         self.stream = pa.open(format=pyaudio.paInt16,
-                              channels=1,
-                              rate=48000,
-                              input=True,
-                              frames_per_buffer=4)
+                         channels=1,
+                         rate=48000,
+                         input=True,
+                         frames_per_buffer=4)
 
         super(sound_entropy, self).__init__()
 
@@ -26,12 +26,3 @@ class sound_entropy(entropy):
                 collection.append(val & 1)
         self.entropy = self._unbias(collection)
 
-
-def test():
-    se = sound_entropy()
-    print(se.get_entropy())
-    print(se.to_bin_list())
-
-
-if __name__ == '__main__':
-    test()

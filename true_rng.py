@@ -1,3 +1,5 @@
+
+
 class true_rng:
 
     def __init__(self, collector):
@@ -28,4 +30,6 @@ class true_rng:
 
         val = self._get_value()
         ran = end - start
+        if ran > 2 ** 32:
+            raise Exception('interval is too big')
         return (val % ran) + start

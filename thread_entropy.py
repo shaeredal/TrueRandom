@@ -31,13 +31,3 @@ class thread_entropy(entropy):
             collection.append(val)
         self.active = False
         self.entropy = self._unbias(collection)
-
-
-def test():
-    te = thread_entropy()
-    print(te.get_entropy())
-    print(len(te.get_bytes()))
-
-
-if __name__ == '__main__':
-    test()
