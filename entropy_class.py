@@ -8,7 +8,8 @@ class entropy:
         self._collect_entropy()
 
     def _unbias(self, collection):
-        return bitarray([collection[i] for i in range( 0 ,len(collection),2) if collection[i] != collection[i+1]])
+        return bitarray(([collection[i] for i in range(0, len(collection), 2)
+                          if collection[i] != collection[i+1]]))
 
     def collect(self):
         self._collect_entropy()
