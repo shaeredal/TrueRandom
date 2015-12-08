@@ -1,6 +1,3 @@
-from sound_entropy import sound_entropy
-#from mem_entropy import mem_entropy
-from mouse_entropy import mouse_entropy
 
 
 class true_rng:
@@ -11,12 +8,6 @@ class true_rng:
         self.cur = 0
 
     def _get_byte(self):
-        #while True:
-        #    for byte in self.bytes:
-        #        print(byte)
-        #        yield byte
-        #    self.collector.collect()
-        #    self.bytes = self.collector.get_bytes()
         if len(self.bytes) == self.cur:
             self.collector.collect()
             self.bytes = self.collector.get_bytes()
@@ -40,21 +31,5 @@ class true_rng:
         val = self._get_value()
         ran = end - start
         if ran > 2 ** 32:
-            raise Exception('')
+            raise Exception('interval is too big')
         return (val % ran) + start
-
-
-def test():
-    tr = true_rng(sound_entropy())
-    #for byte in tr._get_byte():
-    #    print(byte)
-    #print(len(tr.bytes))
-    #import time
-    for i in range(1000):
-        print(tr.get_number(200, 400))
-        #time.sleep(1)
-    #import StatisticWindow
-    #StaticWindow.histogramm([tr.get_number(300) for i in range(1000)])
-
-if __name__ == '__main__':
-    test()

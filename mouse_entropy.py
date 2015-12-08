@@ -23,14 +23,3 @@ class mouse_entropy(entropy):
                 print(collection[-1])
         vs.destroy()
         self.entropy = self._unbias(collection)
-
-
-def test():
-    #import statistic as sw
-    me = mouse_entropy()
-    print(len(me.get_bytes()))
-    #sw.display(list(me.get_bytes()))
-
-
-if __name__ == '__main__':
-    test()
