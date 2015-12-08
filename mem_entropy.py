@@ -5,7 +5,7 @@ from entropy_class import entropy
 
 
 class mem_entropy(entropy):
-    
+
     def __init__(self):
         self.cur = psutil.virtual_memory()[3]
         super(mem_entropy, self).__init__()
@@ -23,4 +23,3 @@ class mem_entropy(entropy):
         if len(collection) % 2 != 0:
             collection = collection[1:]
         self.entropy = self._unbias(collection)
-
